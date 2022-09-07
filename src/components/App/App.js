@@ -1,6 +1,7 @@
 import Header from "../Header/Header.js"
 import Footer from "../Footer/Footer.js"
 import Note from "../Note/Note"
+import notes from "../../notes"
 import './App.css';
 
 //1. Create a new React app.
@@ -21,7 +22,13 @@ function App() {
   return (
     <div className="App">
       <Header />
-      <Note />
+      {notes.map( note => (
+        <Note 
+          key={note.id}
+          title={note.title} 
+          content={note.content}
+        />
+      ))}
       <Footer />
     </div>
   );
