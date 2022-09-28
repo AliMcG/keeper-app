@@ -22,7 +22,7 @@ function CreateArea(props) {
     props.addNote((prevValue) => [...prevValue, note]);
     // resets the textarea to two empty strings
     setNote(initialValue);
-    // This prevents the default clear setting on the form HTML element
+    // This prevents the default clear setting on the HTML form element
     event.preventDefault();
   }
 
