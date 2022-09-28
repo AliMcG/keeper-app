@@ -61,10 +61,11 @@ footer p {
   margin-right: 10px;
   color: #f5ba13;
   border: none;
-  width: 36px;
+  width: 55px;
   height: 36px;
   cursor: pointer;
   outline: none;
+  border-radius: 10%;
 }
 
 form {
