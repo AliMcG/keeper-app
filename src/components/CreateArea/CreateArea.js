@@ -18,6 +18,7 @@ function CreateArea(props) {
     });
   }
   function handleClick(event) {
+    console.log(note)
     // takes the setState from App.js and adds the new value to it
     props.addNote((prevValue) => [...prevValue, note]);
     // resets the textarea to two empty strings
