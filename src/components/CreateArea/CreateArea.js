@@ -9,7 +9,7 @@ function CreateArea(props) {
   };
   // creates a state object that can be tapped into using Dot.Notation
   const [note, setNote] = useState(initialValue);
-  const [newNote, setNewNote] = useState(initialValue)
+  const [newNote, setNewNote] = useState(initialValue);
 
   function handleChange(event) {
     // destructs the event.target
@@ -21,20 +21,19 @@ function CreateArea(props) {
     });
   }
   async function handleClick(event) {
-    console.log(note);
-    const body = JSON.stringify(note)
-    console.log(body)
-   
-
-    axios({
-      method: 'post',
-      url: process.env.REACT_APP_BACKEND_URL,
-      data: body
-    }).then((response)=> {
-      console.log(response)
-      setNewNote(response.data)
-    } );
-
+    axios
+      .post(process.env.REACT_APP_BACKEND_URL, {
+        ...note,
+      })
+      .then(function (response) {
+        console.log(response);
+        console.log(response.data);
+        setNewNote(response.data);
+        console.log(newNote);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
 
     // takes the setState from App.js and adds the new value to it
     props.addNote((prevValue) => [...prevValue, newNote]);
