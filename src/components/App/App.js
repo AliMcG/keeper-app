@@ -16,7 +16,6 @@ function App() {
       setNotesList(() => {
         return [...data];
       });
-      console.log(notesList);
     }
   }, [data]);
 
@@ -33,7 +32,6 @@ function App() {
               data: { id: id },
             })
             .then(function (response) {
-              console.log(response);
               console.log(response.data);
             })
             .catch(function (error) {
