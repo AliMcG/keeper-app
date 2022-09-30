@@ -1,4 +1,7 @@
 import React, { useState } from "react";
+import AddCircleIcon from "@mui/icons-material/AddCircle";
+import Fab from "@mui/material/Fab";
+import Zoom from "@mui/material/Zoom";
 import axios from "axios";
 
 function CreateArea(props) {
@@ -39,7 +42,7 @@ function CreateArea(props) {
 
   return (
     <div>
-      <form>
+      <form className="create-note">
         <input
           onChange={handleChange}
           name="title"
@@ -53,7 +56,11 @@ function CreateArea(props) {
           rows="3"
           value={note.content}
         />
-        <button onClick={handleClick}>Add</button>
+        <Zoom in={true}>
+          <Fab onClick={handleClick}>
+            <AddCircleIcon />
+          </Fab>
+        </Zoom>
       </form>
     </div>
   );
