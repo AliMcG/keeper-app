@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-// import usePost from "../../hooks/usePost.js"
 import axios from "axios";
 
 function CreateArea(props) {
@@ -9,7 +8,6 @@ function CreateArea(props) {
   };
   // creates a state object that can be tapped into using Dot.Notation
   const [note, setNote] = useState(initialValue);
-  const [newNote, setNewNote] = useState(initialValue);
 
   function handleChange(event) {
     // destructs the event.target
@@ -27,18 +25,14 @@ function CreateArea(props) {
       })
       .then(function (response) {
         console.log(response);
-        console.log(response.data);
-        setNewNote(response.data);
-        console.log(newNote);
+        // takes the setState from App.js and adds the new value to it
+        props.addNote((prevValue) => [...prevValue, response.data]);
+        // resets the textarea to two empty strings
+        setNote(initialValue);
       })
       .catch(function (error) {
         console.log(error);
       });
-
-    // takes the setState from App.js and adds the new value to it
-    props.addNote((prevValue) => [...prevValue, newNote]);
-    // resets the textarea to two empty strings
-    setNote(initialValue);
     // This prevents the default clear setting on the HTML form element
     event.preventDefault();
   }

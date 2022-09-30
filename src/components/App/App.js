@@ -7,66 +7,57 @@ import useFetch from "../../hooks/useFetch.js";
 import axios from "axios";
 import "./App.css";
 
-
 function App() {
   const [notesList, setNotesList] = useState([]);
-  const [deletedNote, setDeletedNote] = useState({})
-  const { data, loading, error } = useFetch(process.env.REACT_APP_BACKEND_URL)
-  useEffect(()=>{
+  const { data, loading, error } = useFetch(process.env.REACT_APP_BACKEND_URL);
+
+  useEffect(() => {
     if (!loading && data) {
-      setNotesList(()=> {
-      return [ ...data]
-    })
-  console.log(notesList)}
-  }, [data])
-  
-  // console.log(data)
-  
+      setNotesList(() => {
+        return [...data];
+      });
+      console.log(notesList);
+    }
+  }, [data]);
 
   async function deleteNote(id) {
-    console.log(notesList)
+    console.log(notesList);
     setNotesList((prevValues) => {
-      return prevValues.filter((note, index) => {
-        // return note._id !== id;
+      return prevValues.filter((note) => {
         if (note._id !== id) {
-          return note
+          return note;
         } else {
-          setDeletedNote(note._id)
-          console.log("deleted", note)
+          console.log("deleted", id);
+          axios
+            .delete(process.env.REACT_APP_BACKEND_URL, {
+              data: { id: id },
+            })
+            .then(function (response) {
+              console.log(response);
+              console.log(response.data);
+            })
+            .catch(function (error) {
+              console.log(error);
+            });
         }
       });
     });
-    console.log(deletedNote._id)
-    console.log(typeof deletedNote)
-    // this is the bug. Only need the _id to send to the server to delete the whole object
-    axios
-      .delete(process.env.REACT_APP_BACKEND_URL, {
-        deletedNote._id,
-      })
-      .then(function (response) {
-        console.log(response);
-        console.log(response.data);
-        // setNewNote(response.data);
-        // console.log(newNote);
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
   }
 
   return (
     <div className="App">
       <Header />
       <CreateArea addNote={setNotesList} />
-      {!loading && notesList.map((note, index) => (
-        <Note
-          key={index}
-          id={note._id}
-          title={note.title}
-          content={note.content}
-          delete={deleteNote}
-        />
-      ))}
+      {!loading &&
+        notesList.map((note, index) => (
+          <Note
+            key={index}
+            id={note._id}
+            title={note.title}
+            content={note.content}
+            delete={deleteNote}
+          />
+        ))}
       <Footer />
     </div>
   );
