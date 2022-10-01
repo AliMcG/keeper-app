@@ -4,6 +4,7 @@ import Fab from "@mui/material/Fab";
 import Zoom from "@mui/material/Zoom";
 import axios from "axios";
 
+
 function CreateArea(props) {
   const [showInput, setShowInput] = useState(false);
   const initialValue = {
@@ -20,7 +21,10 @@ function CreateArea(props) {
     // [name] reads the name from the input tag
     setNote((prevValue) => {
       return { ...prevValue, [name]: value };
-    });
+      
+      });
+    
+   
   }
 
   function renderInput() {
@@ -28,6 +32,9 @@ function CreateArea(props) {
   }
 
   async function handleClick(event) {
+    if (note.title === "" || note.content === ""){
+      alert("Enter text in both fields!")
+    } else {
     axios
       .post(process.env.REACT_APP_BACKEND_URL, {
         ...note,
@@ -43,7 +50,7 @@ function CreateArea(props) {
         console.log(error);
       });
     // This prevents the default clear setting on the HTML form element
-    event.preventDefault();
+    event.preventDefault();}
   }
 
   return (
