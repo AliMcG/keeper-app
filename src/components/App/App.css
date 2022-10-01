@@ -9,17 +9,20 @@ html {
 body {
   background: #eee;
   padding: 0 16px;
+  background-color: #0061b5;
+  background-image: url("https://www.transparenttextures.com/patterns/carbon-fibre-big.png");
+/* This is mostly intended for prototyping; please download the pattern and re-host for production environments. Thank you! */
 }
 
 header {
-  background-color: #8b7a4a;
+  background-color: #E8DDB5;
   margin: auto -16px;
   padding: 16px 32px;
   box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.3);
 }
 
 header h1 {
-  color: #fff;
+  color: rgb(11, 11, 11);
   font-family: "McLaren", cursive;
   font-weight: 200;
 }
@@ -59,7 +62,7 @@ footer p {
   position: relative;
   float: right;
   margin-right: 10px;
-  color:  #8b7a4a;
+  color:  #6d6867;
   border: none;
   width: 55px;
   height: 36px;
@@ -91,8 +94,8 @@ form.create-note button {
   position: absolute;
   right: 18px;
   bottom: -18px;
-  background: #8b7a4a;
-  color: #fff;
+  background: #E8DDB5;
+  color: rgb(18, 17, 17);
   border: none;
   border-radius: 50%;
   width: 36px;
