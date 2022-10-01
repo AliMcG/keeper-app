@@ -7,9 +7,16 @@ Using more complex states inside useState, to create an object that can be tappe
 Destructing the "event" from onChange and using the spread operator to add new values to state.object.
 
 Makes use of .filter() to sort through an state.array to remove deleted items.
+Using functions within .filter to sort an array.
 
 First exploration of the new date() object in javaScript.
 
+Full MERN stack app and added useFetch custom hook to GET.
+Discovered that customHooks don't work inside other functions.
+
+USed axios to POST and DELETE data
+
+Used some icons from [material-ui](https://mui.com/material-ui/material-icons/?query=thinking)
 ## Future plans
-To turn this into a full MERN stack app and add a useFetch custom hook to GET, POST, PATCH data
+To add authentication before deployment
 
