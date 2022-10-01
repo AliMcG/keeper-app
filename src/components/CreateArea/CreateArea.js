@@ -5,6 +5,7 @@ import Zoom from "@mui/material/Zoom";
 import axios from "axios";
 
 function CreateArea(props) {
+  const [showInput, setShowInput] = useState(false);
   const initialValue = {
     title: "",
     content: "",
@@ -21,6 +22,11 @@ function CreateArea(props) {
       return { ...prevValue, [name]: value };
     });
   }
+
+  function renderInput() {
+    setShowInput(true);
+  }
+
   async function handleClick(event) {
     axios
       .post(process.env.REACT_APP_BACKEND_URL, {
@@ -43,20 +49,23 @@ function CreateArea(props) {
   return (
     <div>
       <form className="create-note">
-        <input
-          onChange={handleChange}
-          name="title"
-          placeholder="Title"
-          value={note.title}
-        />
+        {showInput && (
+          <input
+            onChange={handleChange}
+            name="title"
+            placeholder="Title"
+            value={note.title}
+          />
+        )}
         <textarea
           onChange={handleChange}
+          onClick={renderInput}
           name="content"
           placeholder="Take a note..."
-          rows="3"
+          rows={!showInput ? "1" : "3"}
           value={note.content}
         />
-        <Zoom in={true}>
+        <Zoom in={showInput}>
           <Fab onClick={handleClick}>
             <AddCircleIcon />
           </Fab>

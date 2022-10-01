@@ -101,3 +101,11 @@ form.create-note button {
   cursor: pointer;
   outline: none;
 }
+
+@media only screen and (max-width: 500px) {
+  
+  form.create-note {
+    position: relative;
+    width: 280px;
+  }
+}
