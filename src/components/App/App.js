@@ -5,14 +5,14 @@ import Note from "../Note/Note";
 import CreateArea from "../CreateArea/CreateArea.js";
 import useFetch from "../../hooks/useFetch.js";
 import axios from "axios";
-import LoginButton from "../Auth/Login.js";
 import { useAuth0 } from "@auth0/auth0-react";
 import "./App.css";
 
 function App() {
   const [notesList, setNotesList] = useState([]);
-  const { data, loading, error } = useFetch(process.env.REACT_APP_BACKEND_URL);
   const { user, isAuthenticated, isLoading } = useAuth0();
+  const { data, loading, error } = useFetch(process.env.REACT_APP_BACKEND_URL);
+  
   console.log(isAuthenticated)
   useEffect(() => {
     if (!loading && data) {
@@ -48,7 +48,7 @@ function App() {
   return (
     <div className="App">
     {!isAuthenticated ? <div>
-      <LoginButton />
+      <Header />
     </div> :
     <div>
       <Header />

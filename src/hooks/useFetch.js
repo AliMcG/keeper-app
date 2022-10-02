@@ -1,9 +1,12 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
+import { useAuth0 } from "@auth0/auth0-react";
+
 
 // https://axios-http.com/docs/cancellation
 
 function useFetch(url) {
+  const { user, isAuthenticated, isLoading } = useAuth0();
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(null);
   const [error, setError] = useState(null);
@@ -13,8 +16,9 @@ function useFetch(url) {
     setData("");
     setError(null);
     const controller = new AbortController();
-    axios
-      .get(url, {
+    if (user) {
+      axios
+      .get(url+user.sub, {
         signal: controller.signal,
       })
       .then((res) => {
@@ -29,6 +33,7 @@ function useFetch(url) {
         setLoading(false);
         setError("An error occurred. Awkward..");
       });
+    }
     return () => {
       controller.abort();
     };

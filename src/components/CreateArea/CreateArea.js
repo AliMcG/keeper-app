@@ -3,13 +3,16 @@ import AddCircleIcon from "@mui/icons-material/AddCircle";
 import Fab from "@mui/material/Fab";
 import Zoom from "@mui/material/Zoom";
 import axios from "axios";
+import { useAuth0 } from "@auth0/auth0-react";
 
 
 function CreateArea(props) {
   const [showInput, setShowInput] = useState(false);
+  const { user, isAuthenticated, isLoading } = useAuth0();
   const initialValue = {
     title: "",
     content: "",
+    userId: user.sub,
   };
   // creates a state object that can be tapped into using Dot.Notation
   const [note, setNote] = useState(initialValue);
@@ -23,7 +26,7 @@ function CreateArea(props) {
       return { ...prevValue, [name]: value };
       
       });
-    
+    console.log(note)
    
   }
 
@@ -35,6 +38,7 @@ function CreateArea(props) {
     if (note.title === "" || note.content === ""){
       alert("Enter text in both fields!")
     } else {
+    console.log(note)
     axios
       .post(process.env.REACT_APP_BACKEND_URL, {
         ...note,
