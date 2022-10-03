@@ -21,6 +21,7 @@ Used some icons from [material-ui](https://mui.com/material-ui/material-icons/?q
 ## Backend server
 The express.js server for this project can be found [here](https://github.com/AliMcG/portfolio-backend-mongodb). It connects to mongobd using mongoose
 
-## Future plans
-To add authentication before deployment
+## Authentication
+The app uses auth0.com to handle user logins. This has been verified through the google.api service.
+Explored some of the customizations available for the universal login on auth0.com.
 
