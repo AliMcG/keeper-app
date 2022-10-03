@@ -14,7 +14,7 @@ First exploration of the new date() object in javaScript.
 Full MERN stack app and added useFetch custom hook to GET.
 Discovered that customHooks don't work inside other functions.
 
-USed axios to POST and DELETE data
+Used axios to POST and DELETE data
 
 Used some icons from [material-ui](https://mui.com/material-ui/material-icons/?query=thinking)
 
