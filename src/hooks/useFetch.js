@@ -18,7 +18,6 @@ function useFetch(url) {
     const controller = new AbortController();
     if (isAuthenticated) {
       const userUrl = url + "/" + user.sub
-      console.log(userUrl)
       axios
       .get(userUrl, {
         signal: controller.signal,

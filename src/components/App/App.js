@@ -16,11 +16,10 @@ function App() {
     if (isAuthenticated && user) {
       // console.log(user.sub);
       const userUrl = process.env.REACT_APP_BACKEND_URL + "/" + user.sub;
-      console.log(userUrl);
       axios
         .get(userUrl)
         .then((res) => {
-          console.log(res.data);
+          // console.log(res.data);
           setNotesList(() => {
             return [...res.data];
           });
@@ -29,37 +28,22 @@ function App() {
           console.log(err);
         });
     }
-    // const controller = new AbortController();
-    // const userUrl = process.env.REACT_APP_BACKEND_URL
-    // axios
-    //   .get(userUrl, {
-    //     userId: user?.sub
-    //   })
-    //   .then((res => {
-    //     console.log(res.data);
-    //     setNotesList(() => {
-    //       return [...res.data];
-    //   })
-    // }))
-    //   .catch((err) => {
-    //     console.log(err);
-    //   })
   }, [isAuthenticated]);
 
   async function deleteNote(id) {
-    console.log(notesList);
+    // console.log(notesList);
     setNotesList((prevValues) => {
       return prevValues.filter((note) => {
         if (note._id !== id) {
           return note;
         } else {
-          console.log("deleted", id);
+          // console.log("deleted", id);
           axios
             .delete(process.env.REACT_APP_BACKEND_URL, {
               data: { id: id },
             })
             .then(function (response) {
-              console.log(response.data);
+              // console.log(response.data);
             })
             .catch(function (error) {
               console.log(error);

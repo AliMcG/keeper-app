@@ -34,13 +34,13 @@ function CreateArea(props) {
     if (note.title === "" || note.content === "") {
       alert("Enter text in both fields!");
     } else {
-      console.log(note);
+      // console.log(note);
       axios
         .post(process.env.REACT_APP_BACKEND_URL, {
           ...note,
         })
         .then(function (response) {
-          console.log(response.data);
+          // console.log(response.data);
           // takes the setState from App.js and adds the new value to it
           props.addNote((prevValue) => [...prevValue, response.data]);
           // resets the textarea to two empty strings
