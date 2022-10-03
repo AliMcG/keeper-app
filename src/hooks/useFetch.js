@@ -6,7 +6,7 @@ import { useAuth0 } from "@auth0/auth0-react";
 // https://axios-http.com/docs/cancellation
 
 function useFetch(url) {
-  const { user, isAuthenticated, isLoading } = useAuth0();
+  const { user, isAuthenticated } = useAuth0();
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(null);
   const [error, setError] = useState(null);
@@ -16,9 +16,11 @@ function useFetch(url) {
     setData("");
     setError(null);
     const controller = new AbortController();
-    if (user) {
+    if (isAuthenticated) {
+      const userUrl = url + "/" + user.sub
+      console.log(userUrl)
       axios
-      .get(url+user.sub, {
+      .get(userUrl, {
         signal: controller.signal,
       })
       .then((res) => {

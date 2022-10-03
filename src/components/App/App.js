@@ -3,24 +3,48 @@ import Header from "../Header/Header.js";
 import Footer from "../Footer/Footer.js";
 import Note from "../Note/Note";
 import CreateArea from "../CreateArea/CreateArea.js";
-import useFetch from "../../hooks/useFetch.js";
+// import useFetch from "../../hooks/useFetch.js";
 import axios from "axios";
 import { useAuth0 } from "@auth0/auth0-react";
 import "./App.css";
 
 function App() {
   const [notesList, setNotesList] = useState([]);
-  const { user, isAuthenticated, isLoading } = useAuth0();
-  const { data, loading, error } = useFetch(process.env.REACT_APP_BACKEND_URL);
-  
-  console.log(isAuthenticated)
+  const { user, isAuthenticated } = useAuth0();
+
   useEffect(() => {
-    if (!loading && data) {
-      setNotesList(() => {
-        return [...data];
-      });
+    if (isAuthenticated) {
+      console.log(user.sub);
+      const userUrl = process.env.REACT_APP_BACKEND_URL + "/" + user.sub;
+      console.log(userUrl);
+      axios
+        .get(userUrl)
+        .then((res) => {
+          console.log(res.data);
+          setNotesList(() => {
+            return [...res.data];
+          });
+        })
+        .catch((err) => {
+          console.log(err);
+        });
     }
-  }, [data]);
+    // const controller = new AbortController();
+    // const userUrl = process.env.REACT_APP_BACKEND_URL
+    // axios
+    //   .get(userUrl, {
+    //     userId: user?.sub
+    //   })
+    //   .then((res => {
+    //     console.log(res.data);
+    //     setNotesList(() => {
+    //       return [...res.data];
+    //   })
+    // }))
+    //   .catch((err) => {
+    //     console.log(err);
+    //   })
+  }, [isAuthenticated]);
 
   async function deleteNote(id) {
     console.log(notesList);
@@ -47,24 +71,27 @@ function App() {
 
   return (
     <div className="App">
-    {!isAuthenticated ? <div>
-      <Header />
-    </div> :
-    <div>
-      <Header />
-      <CreateArea addNote={setNotesList} />
-      {!loading &&
-        notesList.map((note, index) => (
-          <Note
-            key={index}
-            id={note._id}
-            title={note.title}
-            content={note.content}
-            delete={deleteNote}
-          />
-        ))}
-      <Footer />
-    </div>}
+      {!isAuthenticated ? (
+        <div>
+          <Header />
+        </div>
+      ) : (
+        <div>
+          <Header />
+          <CreateArea addNote={setNotesList} />
+          {isAuthenticated &&
+            notesList.map((note, index) => (
+              <Note
+                key={index}
+                id={note._id}
+                title={note.title}
+                content={note.content}
+                delete={deleteNote}
+              />
+            ))}
+          <Footer />
+        </div>
+      )}
     </div>
   );
 }

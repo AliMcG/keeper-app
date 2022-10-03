@@ -5,10 +5,9 @@ import Zoom from "@mui/material/Zoom";
 import axios from "axios";
 import { useAuth0 } from "@auth0/auth0-react";
 
-
 function CreateArea(props) {
   const [showInput, setShowInput] = useState(false);
-  const { user, isAuthenticated, isLoading } = useAuth0();
+  const { user } = useAuth0();
   const initialValue = {
     title: "",
     content: "",
@@ -24,10 +23,7 @@ function CreateArea(props) {
     // [name] reads the name from the input tag
     setNote((prevValue) => {
       return { ...prevValue, [name]: value };
-      
-      });
-    console.log(note)
-   
+    });
   }
 
   function renderInput() {
@@ -35,26 +31,27 @@ function CreateArea(props) {
   }
 
   async function handleClick(event) {
-    if (note.title === "" || note.content === ""){
-      alert("Enter text in both fields!")
+    if (note.title === "" || note.content === "") {
+      alert("Enter text in both fields!");
     } else {
-    console.log(note)
-    axios
-      .post(process.env.REACT_APP_BACKEND_URL, {
-        ...note,
-      })
-      .then(function (response) {
-        console.log(response);
-        // takes the setState from App.js and adds the new value to it
-        props.addNote((prevValue) => [...prevValue, response.data]);
-        // resets the textarea to two empty strings
-        setNote(initialValue);
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
-    // This prevents the default clear setting on the HTML form element
-    event.preventDefault();}
+      console.log(note);
+      axios
+        .post(process.env.REACT_APP_BACKEND_URL, {
+          ...note,
+        })
+        .then(function (response) {
+          console.log(response.data);
+          // takes the setState from App.js and adds the new value to it
+          props.addNote((prevValue) => [...prevValue, response.data]);
+          // resets the textarea to two empty strings
+          setNote(initialValue);
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
+      // This prevents the default clear setting on the HTML form element
+      event.preventDefault();
+    }
   }
 
   return (
