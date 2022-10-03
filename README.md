@@ -17,6 +17,10 @@ Discovered that customHooks don't work inside other functions.
 USed axios to POST and DELETE data
 
 Used some icons from [material-ui](https://mui.com/material-ui/material-icons/?query=thinking)
+
+## Backend server
+The express.js server for this project can be found [here](https://github.com/AliMcG/portfolio-backend-mongodb). It connects to mongobd using mongoose
+
 ## Future plans
 To add authentication before deployment
 
