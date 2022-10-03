@@ -13,8 +13,8 @@ function App() {
   const { user, isAuthenticated } = useAuth0();
 
   useEffect(() => {
-    if (isAuthenticated) {
-      console.log(user.sub);
+    if (isAuthenticated && user) {
+      // console.log(user.sub);
       const userUrl = process.env.REACT_APP_BACKEND_URL + "/" + user.sub;
       console.log(userUrl);
       axios
