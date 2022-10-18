@@ -3,6 +3,7 @@ import Header from "../Header/Header.js";
 import Footer from "../Footer/Footer.js";
 import Note from "../Note/Note";
 import CreateArea from "../CreateArea/CreateArea.js";
+import Profile from "../Auth/Profile.js";
 // import useFetch from "../../hooks/useFetch.js";
 import axios from "axios";
 import { useAuth0 } from "@auth0/auth0-react";
@@ -62,6 +63,7 @@ function App() {
       ) : (
         <div>
           <Header />
+          
           <CreateArea addNote={setNotesList} />
           {isAuthenticated &&
             notesList.map((note, index) => (
