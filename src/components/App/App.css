@@ -40,6 +40,13 @@ header button {
   width: 5rem;
 }
 
+.log-button {
+  position: absolute;
+  top: 2rem;
+  right: 1rem;
+  width: 4.5rem;
+}
+
 .profile h4 {
   color: rgb(11, 11, 11);
   font-family: "McLaren", cursive;
